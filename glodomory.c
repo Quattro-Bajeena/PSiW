@@ -44,7 +44,6 @@ struct Philosopher{
 };
 
 void sort(struct Philosopher sorted_que[]){
-    // maybe I should use sort that preserves order if the values are equal?
     bool swapped = false;
     int sorted_i = PHILOSOPHERS_NO;
     do{
@@ -62,8 +61,6 @@ void sort(struct Philosopher sorted_que[]){
         sorted_i--;
 
     }while(swapped == true);
-
-    // maybe sort once again but take all with id == -1 to the end
 }
 
 void enque(struct Philosopher sorted_que[], struct Philosopher newPhilosopher ){
@@ -83,33 +80,19 @@ void enque(struct Philosopher sorted_que[], struct Philosopher newPhilosopher ){
 
 }
 
-bool is_que_empty(struct Philosopher sorted_que[]){
-    bool empty = true;
-    for(int i = 0; i < PHILOSOPHERS_NO; i++){
-        if(sorted_que[i].id != -1){
-            empty = false;
-            break;
-        }
-    }
-
-    return empty;
-}
-
 struct Philosopher deque(struct Philosopher sorted_que[]){
     if(sorted_que[0].id == -1){
         perror("no philosophers in que!");
     }
     struct Philosopher first_p = sorted_que[0];
 
-    // shidting que one place 
+    // shifting que one place 
     for(int i = 0; i < PHILOSOPHERS_NO-1; i++){
         sorted_que[i] = sorted_que[i+1];
     }
 
     struct Philosopher null_philosopher = {-1,INT_MAX, false};
     sorted_que[PHILOSOPHERS_NO-1] = null_philosopher;
-
-    sort(sorted_que);
 
     return first_p;
     
@@ -127,12 +110,14 @@ void philosopher_prog(
     int id, 
     int waiter_permission_sem, 
     int philosophers_sem, int spoon_status_sem,
-    struct Philosopher philosophers[], bool spoons[]){
+    struct Philosopher philosophers[], bool spoons[])
+    {
+    srand(getpid());
 
     const int left_spoon = id;
     const int right_spoon = (id + 1) % PHILOSOPHERS_NO;
     int sleepTime;
-    srand(getpid());
+
     while(true){
 
         // thinking
@@ -201,7 +186,7 @@ void waiter_prog(
 
         for(int j = 0 ; j < PHILOSOPHERS_NO; j++){
             spoon_queues[i][j].id = -1; //-1 == empty place in que
-            spoon_queues[i][j].amount_eaten = INT_MAX; //kinda hack I guess to philospher somehow eat so much as INT_MAX
+            spoon_queues[i][j].amount_eaten = INT_MAX;
             spoon_queues[i][j].ready_to_eat = false;
         }
         
@@ -259,19 +244,19 @@ void waiter_prog(
 
 
 int main(){
-    int philosophers_shmid = shmget(1, PHILOSOPHERS_NO*sizeof(struct Philosopher), IPC_CREAT|0600);
+    int philosophers_shmid = shmget(IPC_PRIVATE, PHILOSOPHERS_NO*sizeof(struct Philosopher), IPC_CREAT|0600);
     struct Philosopher* philosophers = (struct Philosopher*)shmat(philosophers_shmid, NULL, 0);
 
     // spoon false -> in use, true -> free to use
-    int spoons_shmid = shmget(2, PHILOSOPHERS_NO*sizeof(bool), IPC_CREAT|0600);
+    int spoons_shmid = shmget(IPC_PRIVATE, PHILOSOPHERS_NO*sizeof(bool), IPC_CREAT|0600);
     bool* spoons = (bool*)shmat(spoons_shmid, NULL, 0);
 
 
-    int spoon_status_sem = semget(1, 1, IPC_CREAT|0600);
+    int spoon_status_sem = semget(IPC_PRIVATE, 1, IPC_CREAT|0600);
     semctl(spoon_status_sem, 0, SETVAL, 1);
 
-    int waiter_permission_sem = semget(2, PHILOSOPHERS_NO, IPC_CREAT|0600);
-    int philosophers_sem = semget(3, PHILOSOPHERS_NO, IPC_CREAT|0600);
+    int waiter_permission_sem = semget(IPC_PRIVATE, PHILOSOPHERS_NO, IPC_CREAT|0600);
+    int philosophers_sem = semget(IPC_PRIVATE, PHILOSOPHERS_NO, IPC_CREAT|0600);
     
     
     for(int i = 0 ; i < PHILOSOPHERS_NO; i++){

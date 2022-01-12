@@ -1,0 +1,25 @@
+Pięciu głodomorów
+
+Rozwiązałem ten problem wykorzystując kelnera. Jest to oddzielny wątek który który działa w dwóch etapach. Najpier sprawdza czy któryś z filozofów jest gotowy do jedzenia, jeśli tak to dodaje go to dwóch kolejek przypisanych łyżkom, z których korzysta ten filozof. 
+
+Po wpusczeniu wszystkich głodnych filozofów do kolejek sprawdza którzy z nich mogą przystąpić do jedzenia. Żeby tak się stało muszą zajść 4 warunki, tzn. obie łyżki danego filozofa nie mogą być używane oraz musi być on pierwszy w kolejce do obu z nich. 
+W takim przypadku kelner zdejmuje filozofa z kolejki, zaznacza łyżki jako znajdujące się w użyciu i sygnalizuje jemu, że może zacząć jeść.
+
+Filozof po zjedzeniu zwiększa wartość reprezentującą łączną wagę zjedzonych posiłków, oraz odkłada używane łyżki.
+
+Wspomniane kolejki nie działają na zasadzie FIFO, tylko przy każdym dołożeniu filozofa są sortowane pod względem tego ile oni zjedli do tej pory rosnąco.
+
+Wykorzystane mechanizmy IPC:
+1. Shared memory:
+    - tablica przechowująca dane o filozofach
+    - tablica przechowująca inforamcję czy łyżka jest w użyciu
+2. Semaphores:
+    - pojedyńczy pilnujący dostępu do tablicy ze statusem łyżek
+    - tablica przyzwoleń rozpoczęcia jedzenia dla każdego filozofa
+    - tablica pilnująca sprawdzania i modyfikacji danych filozofa
+
+
+Skompilowanie i uruchomienie:
+W folderze jest obecny makefile więc wystarczy wykonać polecenia "make" oraz "./program.out"
+
+Jako, że procesy będą działały w nieskończoność, żeby je przerwać trzeba wykonać komendę "killall -9 program.out"
