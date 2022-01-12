@@ -23,3 +23,14 @@ Skompilowanie i uruchomienie:
 W folderze jest obecny makefile więc wystarczy wykonać polecenia "make" oraz "./program.out"
 
 Jako, że procesy będą działały w nieskończoność, żeby je przerwać trzeba wykonać komendę "killall -9 program.out"
+
+Działanie programu:
+
+W celu zwiększenia czytelności i możliwości obserwacji wszystkich wątków naraz każdy będzie się wyświetała w osobnej "kolumnie". Terminal musi więc mieć odpowiednią szerokość żeby poprawnie się program wyświetlał.
+
+Kolumna najbardziej po lewej stronie to kelner, po prawej filozofowie z id od 0 do 4.
+Kelner podaje kiedy doda filozofa do kolejek, wyświetla też wtedy aktualne stany obu z nich w formacie "que *id łyżki*: *id filozofa*(*ile zjadł*), ..."
+Podaje także kiedy zezwolił filozofowi na rozpoczęcie jedzenia.
+
+Filozofwie za to podają kiedy zaczają myśleć, kiedy czekają na pozwolenie, i kiedy zaczną jeść.
+Po obserwacji działania przez pewien czas zauważy się, że w żadnym momencie więcej niż dwóch filozofów nie je na raz, oraz że zawsze są oni oddaleni o jedno miejsce. Oznacza to, że kelner przyznający dostęp do zasobów działa poprawnie.

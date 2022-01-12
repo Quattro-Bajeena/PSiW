@@ -121,10 +121,10 @@ void philosopher_prog(
     while(true){
 
         // thinking
-        sleepTime = (rand()%20);
+        sleepTime = 1 + (rand()%20);
         phil_print(id);printf("%i: started\033[0;32m THINKing\033[0m %is\n", id, sleepTime);
         sleep(sleepTime);
-        phil_print(id);printf("%i: stopped\033[0;32m THINKing\033[0m\n", id);
+        //phil_print(id);printf("%i: stopped\033[0;32m THINKing\033[0m\n", id);
         
 
         // ready to eat
@@ -137,7 +137,7 @@ void philosopher_prog(
         wait(waiter_permission_sem, id); 
 
         // eating
-        sleepTime = (rand()%20);
+        sleepTime = 1 + (rand()%20);
         phil_print(id);printf("%i: started\033[0;31m EATing\033[0m %is\n", id, sleepTime);
         sleep(sleepTime);
 
@@ -151,7 +151,8 @@ void philosopher_prog(
         philosophers[id].amount_eaten += MEAL_WEIGHT;
         signal(philosophers_sem, id);
         
-        phil_print(id);printf("%i: stopped\033[0;31m EATing\033[0m, eaten: %i\n", id, philosophers[id].amount_eaten);
+        //phil_print(id);printf("%i: stopped\033[0;31m EATing\033[0m, eaten: %i\n", id, philosophers[id].amount_eaten);
+        phil_print(id);printf("%i: ate: %i\n", id, philosophers[id].amount_eaten);
 
 
     }
@@ -165,7 +166,7 @@ void print_que(int spoon_num, struct Philosopher* que){
     int i = 0;
     int phil_id = que[i].id;
     while(phil_id != -1){
-        printf("%i(%i)", phil_id, que[i].amount_eaten);
+        printf("%i(%i), ", phil_id, que[i].amount_eaten);
         i++;
         phil_id = que[i].id;
     }
