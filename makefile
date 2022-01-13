@@ -1,6 +1,2 @@
-
-program.out: glodomory.c
-	cc -Wall glodomory.c -o program.out
-
-clean:
-	rm program.out
+program.out: threads.c
+	cc -Wall -Wextra -pthread threads.c
