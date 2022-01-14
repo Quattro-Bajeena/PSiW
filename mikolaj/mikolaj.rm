@@ -1,0 +1,20 @@
+Święty Mikołaj
+
+Działanie wątków
+
+Mikołaj:
+Jeśli nie ma dostatecznej liczby ani reniferów ani skrzatów mikołaj zasypia do otrzymania sygnału budzącego. Ścieżki działania dla reniferów oraz skrzatów wyglądają podobnie. Na początku sygnalizuje odpowiedniej ilości (wszyskim reniferom, lub 3 skrzatom) rozpoczęcie jego aktywności, redukuje zmienna symbolizującą ilość czekających na niego danego typu wątków i rozpoczyna na pewien czas daną aktywność. Po jej zakończeniu sygnalizuje to "będącym z nim" wątkom. I powraca na początek, do czekania na zebranie się reniferów lub skrzatów.
+
+Renifery/Skrzaty:
+Przed przyjściem do mikołaja wątki wykonują swoją aktywość przez pewien czas. Kiedy w końcu przyjdą do niego zwiększają zmienną ilości czekającyh wątków tego typu, a jeśli jest dostatecznie wysoka wypuszczją sygnał budzący mikołaja. Następnie czekają na sygnał rozpoczęcia aktywności, a potem jej zakończenia. Powracają po tym na początek.
+
+
+Mechanizmy pthread:
+Program wykorzystuje pięć pthread_cond_t, oraz 2 zmienne stanu dzielonego pomiędzy wątkami - ilość obecnie oczekujących reniferów i skrzatów.
+
+
+Skompilowanie i uruchomienie:
+W folderze jest obecny makefile więc wystarczy wykonać polecenia "make" oraz "./program.out"
+
+Działanie programu:
+Wiadomości z każdego wątku bądą się wyświetlały w oddzielnej "kolumnie" w terminalu. Pierwszy z lewej jest mikołaj, potem renifery a z prawej skrzaty. Żeby wszystkie 19 kolumn poprawnie wyświetało się koło siebie potrzeba dużego monitora lub ustawienia małej czcionki na terminalu, więc w ramach sprawdzanie poleciłbym zmienjszenie ilości reniferów i skrzatów (te liczby są one ustawione jako #define na górze pliku.)zip[]

@@ -10,10 +10,10 @@ Filozof po zjedzeniu zwiększa wartość reprezentującą łączną wagę zjedzo
 Wspomniane kolejki nie działają na zasadzie FIFO, tylko przy każdym dołożeniu filozofa są sortowane pod względem tego ile oni zjedli do tej pory rosnąco.
 
 Wykorzystane mechanizmy IPC:
-1. Shared memory:
+1. Współdzielona pamięć:
     - tablica przechowująca dane o filozofach
     - tablica przechowująca inforamcję czy łyżka jest w użyciu
-2. Semaphores:
+2. Semafory:
     - pojedyńczy pilnujący dostępu do tablicy ze statusem łyżek
     - tablica przyzwoleń rozpoczęcia jedzenia dla każdego filozofa
     - tablica pilnująca sprawdzania i modyfikacji danych filozofa
