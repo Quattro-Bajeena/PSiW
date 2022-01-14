@@ -17,4 +17,4 @@ Skompilowanie i uruchomienie:
 W folderze jest obecny makefile więc wystarczy wykonać polecenia "make" oraz "./program.out"
 
 Działanie programu:
-Wiadomości z każdego wątku bądą się wyświetlały w oddzielnej "kolumnie" w terminalu. Pierwszy z lewej jest mikołaj, potem renifery a z prawej skrzaty. Żeby wszystkie 19 kolumn poprawnie wyświetało się koło siebie potrzeba dużego monitora lub ustawienia małej czcionki na terminalu, więc w ramach sprawdzanie poleciłbym zmienjszenie ilości reniferów i skrzatów (te liczby są one ustawione jako #define na górze pliku.)zip[]
+Wiadomości z każdego wątku bądą się wyświetlały w oddzielnej "kolumnie" w terminalu. Pierwszy z lewej jest mikołaj, potem renifery a z prawej skrzaty. Żeby wszystkie 19 kolumn poprawnie wyświetało się koło siebie potrzeba dużego monitora lub ustawienia małej czcionki na terminalu, więc w ramach sprawdzanie poleciłbym zmienjszenie ilości reniferów i skrzatów (te liczby są one ustawione jako #define na górze pliku.
